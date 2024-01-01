@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -20,9 +21,16 @@ mongoose
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true
   })
   .then(() => console.log('DB connection successful!'));
+
+app.use(cors());
+
+app.get('/', (req, res) => {
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.send('API is running');
+});
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {

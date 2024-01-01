@@ -4,7 +4,6 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
-const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 
@@ -21,13 +20,10 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-
-
 // 1) GLOBAL MIDDLEWARES
 // Serving static files
 // Example middleware setup in your Express app
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 // Set security HTTP headers
 app.use(helmet());
@@ -52,9 +48,6 @@ app.use(cookieParser());
 
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
-
-// Data sanitization against XSS
-app.use(xss());
 
 // Prevent parameter pollution
 app.use(
