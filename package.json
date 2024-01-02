@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js",
-    "build": "app.js"
+    "debug": "ndb server.js"
   },
   "author": "Jonas Schmedtmann",
   "license": "ISC",
